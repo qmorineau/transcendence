@@ -1,0 +1,22 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "main": "pong.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/blessed": "^0.1.25",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^1.0.1",
+    "https": "^1.0.0",
+    "neo-blessed": "^0.2.0",
+    "set-cookie-parser": "^2.7.1",
+    "uuid": "^13.0.0",
+    "ws": "^8.18.3"
+  },
+  "description": ""
+}

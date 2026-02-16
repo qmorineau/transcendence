@@ -1,0 +1,96 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["metrics"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tournament {
+  id            Int                 @id @default(autoincrement())
+  status        String              @default("IN_PROGRESS")
+  startedAt     DateTime            @default(now())
+  endedAt       DateTime?
+
+  winnerId      Int?
+
+  createdAt     DateTime  @default(now())
+
+  matches       Match[]
+
+  @@index([status])
+  @@index([startedAt])
+}
+
+
+model Match {
+  id             Int                @id @default(autoincrement())
+  tournamentId   Int
+  status         String             @default("IN_PROGRESS")
+
+  player1Id      Int
+  player1Alias   String
+  player2Id      Int
+  player2Alias   String
+
+  p1Score        Int                @default(0)
+  p2Score        Int                @default(0)
+  winnerId       Int?
+
+  startedAt      DateTime?
+  endedAt        DateTime?
+
+  tournament    Tournament          @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime            @default(now())
+  
+  @@index([tournamentId, status])
+  @@index([tournamentId, endedAt])
+  @@index([player1Id])
+  @@index([player2Id])
+  @@index([winnerId])
+}
+
+model PrivateMatch {
+  id            Int         @id @default(autoincrement())
+
+  player1Id     Int
+  player2Id     Int
+
+  status        String      @default("COMING_UP")
+  p1Score       Int         @default(0)
+  p2Score       Int         @default(0)
+  winnerId      Int?
+  
+  createdById   Int
+
+  startedAt     DateTime     @default(now())
+  endedAt       DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([player1Id])
+  @@index([player2Id])
+  @@index([winnerId])
+  @@index([status, startedAt])
+}
+
+model SeenEvent {
+  id     String  @id
+  seenAt DateTime
+}
+
+
+model Outbox {
+  id           String   @id        // UUID
+  type         String
+  aggregateId  Int
+  payload      String              // JSON envelope
+  occurredAt   DateTime
+  publishedAt  DateTime?
+  @@index([publishedAt])
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full w-full">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./main.css">
+		<link rel="stylesheet" href="./loader.css">
+		<link rel="stylesheet" href="./pongloader.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+		<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+		<script type="importmap">
+		{
+			"imports": {
+
+"@babylonjs/core"													: "./node_modules/@babylonjs/core/index.js",
+"@babylonjs/loaders/glTF" 											: "./node_modules/@babylonjs/loaders/glTF/index.js",
+"@babylonjs/core/Misc/observable.js"								: "./node_modules/@babylonjs/core/Misc/observable.js",
+"@babylonjs/core/Misc/tools.js"										: "./node_modules/@babylonjs/core/Misc/tools.js",
+"@babylonjs/core/Loading/sceneLoader.js"							: "./node_modules/@babylonjs/core/Loading/sceneLoader.js",
+"@babylonjs/core/assetContainer.js"									: "./node_modules/@babylonjs/core/assetContainer.js",
+"@babylonjs/core/Misc/logger.js"									: "./node_modules/@babylonjs/core/Misc/logger.js",
+"@babylonjs/core/Misc/dataReader.js"								: "./node_modules/@babylonjs/core/Misc/dataReader.js",
+"@babylonjs/core/Misc/fileTools.js"									: "./node_modules/@babylonjs/core/Misc/fileTools.js",
+"@babylonjs/core/Misc/error.js"										: "./node_modules/@babylonjs/core/Misc/error.js",
+"@babylonjs/core/Maths/math.vector.js"								: "./node_modules/@babylonjs/core/Maths/math.vector.js",
+"@babylonjs/core/Maths/math.color.js"								: "./node_modules/@babylonjs/core/Maths/math.color.js",
+"@babylonjs/core/Cameras/camera.js"									: "./node_modules/@babylonjs/core/Cameras/camera.js",
+"@babylonjs/core/Cameras/freeCamera.js"								: "./node_modules/@babylonjs/core/Cameras/freeCamera.js",
+"@babylonjs/core/Animations/animation.js"							: "./node_modules/@babylonjs/core/Animations/animation.js",
+"@babylonjs/core/Bones/bone.js"										: "./node_modules/@babylonjs/core/Bones/bone.js",
+"@babylonjs/core/Bones/skeleton.js"									: "./node_modules/@babylonjs/core/Bones/skeleton.js",
+"@babylonjs/core/Materials/effect.js"								: "./node_modules/@babylonjs/core/Materials/effect.js",
+"@babylonjs/core/Materials/material.js"								: "./node_modules/@babylonjs/core/Materials/material.js",
+"@babylonjs/core/Materials/multiMaterial.js"						: "./node_modules/@babylonjs/core/Materials/multiMaterial.js",
+"@babylonjs/core/Materials/standardMaterial.js"						: "./node_modules/@babylonjs/core/Materials/standardMaterial.js",
+"@babylonjs/core/Materials/shaderMaterial.js"						: "./node_modules/@babylonjs/core/Materials/shaderMaterial.js",
+"@babylonjs/core/Materials/Textures/texture.js"						: "./node_modules/@babylonjs/core/Materials/Textures/texture.js",
+"@babylonjs/core/Meshes/mesh.vertexData.js"							: "./node_modules/@babylonjs/core/Meshes/mesh.vertexData.js",
+"@babylonjs/core/Buffers/buffer.js"									: "./node_modules/@babylonjs/core/Buffers/buffer.js",
+"@babylonjs/core/Meshes/geometry.js"								: "./node_modules/@babylonjs/core/Meshes/geometry.js",
+"@babylonjs/core/Meshes/subMesh.js"									: "./node_modules/@babylonjs/core/Meshes/subMesh.js",
+"@babylonjs/core/Meshes/abstractMesh.js"							: "./node_modules/@babylonjs/core/Meshes/abstractMesh.js",
+"@babylonjs/core/Meshes/mesh.js"									: "./node_modules/@babylonjs/core/Meshes/mesh.js",
+"@babylonjs/core/Meshes/mesh.js"									: "./node_modules/@babylonjs/core/Meshes/mesh.js",
+"@babylonjs/core/Lights/hemisphericLight.js"						: "./node_modules/@babylonjs/core/Lights/hemisphericLight.js",
+"@babylonjs/core/Lights/directionalLight.js"						: "./node_modules/@babylonjs/core/Lights/directionalLight.js",
+"@babylonjs/core/Lights/pointLight.js"								: "./node_modules/@babylonjs/core/Lights/pointLight.js",
+"@babylonjs/core/Lights/spotLight.js"								: "./node_modules/@babylonjs/core/Lights/spotLight.js",
+"@babylonjs/core/Engines/constants.js"								: "./node_modules/@babylonjs/core/Engines/constants.js",
+"@babylonjs/core/Misc/deferred.js"									: "./node_modules/@babylonjs/core/Misc/deferred.js",
+"@babylonjs/core/Materials/PBR/pbrMaterial.js"						: "./node_modules/@babylonjs/core/Materials/PBR/pbrMaterial.js",
+"@babylonjs/core/Meshes/transformNode.js"							: "./node_modules/@babylonjs/core/Meshes/transformNode.js",
+"@babylonjs/core/Morph/morphTarget.js"								: "./node_modules/@babylonjs/core/Morph/morphTarget.js",
+"@babylonjs/core/Morph/morphTargetManager.js"						: "./node_modules/@babylonjs/core/Morph/morphTargetManager.js",
+"@babylonjs/core/Culling/boundingInfo.js"							: "./node_modules/@babylonjs/core/Culling/boundingInfo.js",
+"@babylonjs/core/Misc/deepMerger.js"								: "./node_modules/@babylonjs/core/Misc/deepMerger.js",
+"@babylonjs/core/Buffers/bufferUtils.js"							: "./node_modules/@babylonjs/core/Buffers/bufferUtils.js",
+"@babylonjs/core/Maths/sphericalPolynomial.js"						: "./node_modules/@babylonjs/core/Maths/sphericalPolynomial.js",
+"@babylonjs/core/Materials/Textures/rawCubeTexture.js"				: "./node_modules/@babylonjs/core/Materials/Textures/rawCubeTexture.js",
+"@babylonjs/core/Meshes/thinInstanceMesh.js"						: "./node_modules/@babylonjs/core/Meshes/thinInstanceMesh.js",
+"@babylonjs/core/Meshes/Compression/meshoptCompression.js"			: "./node_modules/@babylonjs/core/Meshes/Compression/meshoptCompression.js",
+"@babylonjs/core/Lights/light.js"									: "./node_modules/@babylonjs/core/Lights/light.js",
+"@babylonjs/core/Meshes/Compression/dracoDecoder.js"				: "./node_modules/@babylonjs/core/Meshes/Compression/dracoDecoder.js",
+"@babylonjs/core/Materials/Textures/renderTargetTexture.js"			: "./node_modules/@babylonjs/core/Materials/Textures/renderTargetTexture.js",
+"@babylonjs/core/Animations/animationEvent.js"						: "./node_modules/@babylonjs/core/Animations/animationEvent.js",
+"@babylonjs/core/Audio/sound.js"									: "./node_modules/@babylonjs/core/Audio/sound.js",
+"@babylonjs/core/Audio/weightedsound.js"							: "./node_modules/@babylonjs/core/Audio/weightedsound.js",
+"@babylonjs/core/Audio/audioSceneComponent.js"						: "./node_modules/@babylonjs/core/Audio/audioSceneComponent.js",
+"@babylonjs/core/FlowGraph/flowGraphCoordinator.js"					: "./node_modules/@babylonjs/core/FlowGraph/flowGraphCoordinator.js",
+"@babylonjs/core/FlowGraph/flowGraphParser.js"						: "./node_modules/@babylonjs/core/FlowGraph/flowGraphParser.js",
+"@babylonjs/core/FlowGraph/Blocks/flowGraphBlockFactory.js"			: "./node_modules/@babylonjs/core/FlowGraph/Blocks/flowGraphBlockFactory.js",
+"@babylonjs/core/Misc/guid.js"										: "./node_modules/@babylonjs/core/Misc/guid.js",
+"@babylonjs/core/FlowGraph/flowGraphRichTypes.js"					: "./node_modules/@babylonjs/core/FlowGraph/flowGraphRichTypes.js",
+"@babylonjs/core/FlowGraph/flowGraphBlock.js"						: "./node_modules/@babylonjs/core/FlowGraph/flowGraphBlock.js",
+"@babylonjs/core/Animations/animationGroup.js"						: "./node_modules/@babylonjs/core/Animations/animationGroup.js"
+
+			}
+		}
+		</script>
+		<title>Transcendance</title>
+	</head>
+
+	<!-- 2fa dialog -->
+
+	<body class="bg-dark h-full w-full p-0 space-x-3 text-white">
+
+
+		<!-- dialog box -->
+		<div id="dial" class="fixed h-full w-full inset-0 z-[200] bg-dark/30 backdrop-blur-lg flex justify-center items-center pointer-events-none opacity-0 transition-all transform-all duration-300">
+			<!-- content -->
+			<div class="dial_content bg-catpuccin-base rounded-2xl p-5">
+			</div>
+		</div>
+
+		<!-- login / signin -->
+		<div id="login_page" class="hidden fixed h-full w-full inset-0 z-[100] bg-[url(./assets/images/login-bg.png)] bg-no-repeat bg-center bg-cover flex-col justify-center items-center p-5 lg:p-20 gap-20">
+
+			<!-- title -->
+			<h1 class="font-title text-5xl sm:text-5xl md:text-7xl lg:text-8xl">Transcendance</h1>
+
+			<!-- row div -->
+			<div class="flex flex-1 flex-col lg:flex-row gap-5 items-center justify-center w-full">
+
+				<!-- main div -->
+				<div id="in_main" class="flex-1 flex flex-col justify-center items-center w-full max-w-[1000px] max-h-[1000px] min-h-[360px] md:rounded-3xl h-1/2 md:h-full lg:h-3/4 md:border md:border-white gap-5 p-5">
+				</div>
+
+				<!-- secondary div-->
+				<div id="in_sec" class="hidden md:flex flex flex-none flex-col justify-center items-center rounded-3xl px-10 rounded-3xl md:h-1/3 lg:h-3/4 border border-white gap-10 w-full max-h-[1000px] min-h-[360px] lg:w-[400px]">
+				</div>
+			</div>
+		</div>
+
+		<!-- notif_box -->
+		<div id="notif_box" class="fixed w-[500px] h-fit min-h-0 top-5 right-5 z-[200] flex flex-col items-center gap-5"></div>
+
+		<!-- Blur page -->
+		<!-- <div id="blur_bg" class="fixed h-full w-full inset-0 z-[100] bg-dark bg-opacity-30 backdrop-blur-md flex justify-center items-center"> -->
+			<!-- loader -->
+			<!-- <span id="load" class="loader">Transcendance</span> -->
+		<!-- </div> -->
+
+		<!-- game join annim -->
+		<!-- <div id="game_join" class="fixed h-full w-full inset-0 z-[300] relative hidden"> -->
+		<!-- 	<img src="/assets/svg/fight_top.svg"    class="fixed top-0     left-0 w-full h-[59.25%] transform transition-transform duration-1000 translate-x-[100%]" id="gamePlayersTop"> -->
+		<!-- 	<img src="/assets/svg/fight_bottom.svg" class="fixed bottom-0  left-0 w-full h-[59.25%] transform transition-transform duration-1000 translate-x-[-100%]" id="gamePlayersBottom"> -->
+		<!-- </div> -->
+
+		<!---->
+		<!-- <nav class="flex flex-col bg-accent1 w-16 text-white p-2 rounded-3xl overflow-hidden"> -->
+		<!---->
+		<!-- 	<div class="flex flex-col items-center justify-center gap-2 p-2"> -->
+		<!-- 		<div id="homeBtn"><i class="text-3xl bi bi-app"></i></div> -->
+		<!-- 	</div> -->
+		<!---->
+		<!-- 	<div id="icons-wraper" class="flex flex-1 flex-col items-center justify-center gap-3 "> -->
+		<!-- 		<div id="dashboadBtn"><i class="text-3xl bi bi-x-diamond-fill"></i></div> -->
+		<!-- 		<div id="pongBtn"    ><i class="text-3xl bi bi-joystick"></i></div> -->
+		<!-- 		<div id="testBtn"    ><i class="text-3xl bi bi-bounding-box"></i></div> -->
+		<!-- 		<div id="adminBtn"   ><i class="text-3xl bi bi-activity"></i></div> -->
+		<!---->
+		<!-- 	</div> -->
+		<!---->
+		<!-- 	<div class="flex flex-col items-center justify-center gap-2 p-2"> -->
+		<!-- 		<div><i class="text-2xl bi bi-door-closed-fill"></i></div> -->
+		<!-- 		<button id="profileBtn"><i class="text-2xl bi bi-gear-fill"></i></button> -->
+		<!-- 	</div> -->
+		<!---->
+		<!-- </nav> -->
+		<!---->
+
+		<!-- Main app container -->
+		<main id="app" class="bg-transparent p-0 w-full h-full overflow-hidden">
+		</main>
+
+		<!-- scripts -->
+		<script type="module" src="login.js"> 	   </script>
+		<script type="module" src="main.js">       </script>
+		<script type="module" src="music.js">      </script>
+
+
+		<!-- debug -->
+		<!-- <style> * { outline: 2px solid red !important; } </style> -->
+	</body>
+</html>

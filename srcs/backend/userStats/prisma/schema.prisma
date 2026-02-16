@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["metrics"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SeenEvent {
+  id     String  @id
+  seenAt DateTime
+}
+
+model UserStats {
+  userId     Int     @id
+  scored     Int     @default(0)
+  conceded   Int     @default(0)
+  wins       Int     @default(0)
+  losses     Int     @default(0)
+  elo        Int     @default(1200)
+  streak     Int     @default(0)
+  bestStreak Int     @default(0)
+  updatedAt  DateTime @updatedAt
+}

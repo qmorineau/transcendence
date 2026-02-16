@@ -1,0 +1,35 @@
+<h1 class="font-title text-3xl md:text-4xl lg:text-4xl">Welcome, new one!</h1>
+
+<!-- form  -->
+<form id="signin_form" class="flex flex-col w-full gap-5 justify-center items-center">
+
+	<div class="flex flex-row w-full justify-center items-center bg-transparent border border-white rounded-full p-3 gap-3 text-xl max-w-2xl">
+		<i class="bi bi-person-circle"></i>
+		<input id="signin_fname" type="text" placeholder="first name..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+	</div>
+
+	<div class="flex flex-row w-full justify-center items-center bg-transparent border border-white rounded-full p-3 gap-3 text-xl max-w-2xl">
+		<i class="bi bi-person-circle"></i>
+		<input id="signin_lname" type="text" placeholder="last name..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+	</div>
+
+	<div class="flex flex-row w-full justify-center items-center bg-transparent border border-white rounded-full p-3 gap-3 text-xl max-w-2xl">
+		<i class="bi bi-person-circle"></i>
+		<input id="signin_uname" type="text" placeholder="username..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+	</div>
+
+	<div class="flex flex-row w-full justify-center items-center bg-transparent border border-white rounded-full p-3 gap-3 text-xl max-w-2xl">
+		<i class="bi bi-asterisk"></i>
+		<input id="signin_paswd" type="password" placeholder="password..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+	</div>
+
+	<button type="submit" class="flex flex-row w-full justify-center items-center bg-gray-800 rounded-full p-3 gap-3 text-xl max-w-2xl" id="signin_btn"> 
+		<strong>sign-in</strong><i class="bi bi-box-arrow-in-right"></i>
+	</button>
+</form>
+
+<!-- api signin error --> 
+<div id="error_box"></div>
+
+<!-- mini login -->
+<p class="md:hidden">an account ? <button id="to_login2" class="text-gray-200">log-in</button></p>

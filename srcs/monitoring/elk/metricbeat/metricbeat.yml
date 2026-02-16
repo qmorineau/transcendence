@@ -1,0 +1,68 @@
+# metricbeat.config.modules:
+#   path: ${path.config}/modules.d/*.yml
+#   reload.enabled: false
+
+# setup.kibana:
+#   hosts: ["http://kibana:5601"]
+#   username: elastic
+#   password: ${ELASTIC_PASSWORD}
+#   ssl.verification_mode: none
+
+# setup.dashboards.enabled: true
+# setup.ilm.enabled: true
+# data_stream.namespace: default
+
+metricbeat.modules:
+- module: elasticsearch
+  xpack.enabled: true
+  period: 10s
+  hosts: ${ELASTIC_HOSTS}
+  ssl.certificate_authorities: "certs/ca/ca.crt"
+  ssl.certificate: "certs/es01/es01.crt"
+  ssl.key: "certs/es01/es01.key"
+  username: ${ELASTIC_USER}
+  password: ${ELASTIC_PASSWORD}
+  ssl.enabled: true
+  
+
+
+- module: logstash
+  xpack.enabled: true
+  period: 10s
+  hosts: ${LOGSTASH_HOSTS}
+
+
+- module: kibana
+  metricsets:
+    - stats
+  period: 10s
+  hosts: ${KIBANA_HOSTS}
+  username: ${ELASTIC_USER}
+  password: ${ELASTIC_PASSWORD}
+  xpack.enabled: true
+  ssl.certificate_authorities: "/usr/share/metricbeat/certs/ca/ca.crt"
+  ssl.certificate: "/usr/share/metricbeat/certs/kibana/kibana.crt"
+  ssl.key: "/usr/share/metricbeat/certs/kibana/kibana.key"
+  ssl.verification_mode: full
+
+- module: prometheus
+  metricsets: [remote_write]
+  # listens for Prometheus remote_write
+  host: "0.0.0.0"
+  port: 9201
+  labels.dedot: true
+
+
+processors:
+  - add_host_metadata: ~
+  - add_docker_metadata: ~
+
+
+output.elasticsearch:
+  hosts: ${ELASTIC_HOSTS}
+  username: ${ELASTIC_USER}
+  password: ${ELASTIC_PASSWORD}
+  ssl:
+    certificate: "certs/es01/es01.crt"
+    certificate_authorities: "certs/ca/ca.crt"
+    key: "certs/es01/es01.key"

@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["metrics"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SeenEvent {
+  id     String  @id
+  seenAt DateTime
+}
+
+model OAuthIdentity {
+  id              Int       @id @default(autoincrement())
+  provider        String
+  providerUserId  String
+  userId          Int
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  username        String?
+  avatarUrl       String?
+  scopes          String?
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([provider, providerUserId])
+  @@index([userId])
+}
+
+
+model User {
+  id              Int        @id @default(autoincrement())
+  login           String     @unique
+  passwordHash    String
+
+  title           String
+  status          String     @default("OFFLINE")
+
+  firstName       String?
+  lastName        String?
+
+  avatarUrl       String     @default("/app/public/avatars/default_pp.jpeg")
+  avatarMime      String     @default("image/jpeg")
+
+  firstStep       Boolean    @default(false)
+  twoFA_uuid      String?    @unique
+  twoFA_enabled   Boolean    @default(false)
+  twoFA_verified  Boolean    @default(false)
+
+  otp_base32      String?
+  otp_auth_url    String?
+
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  oauthEnabled    Boolean    @default(false)
+  oauthIdentity   OAuthIdentity[]
+}
+
+model Outbox {
+  id           String   @id        // UUID
+  type         String
+  aggregateId  Int
+  payload      String              // JSON envelope
+  occurredAt   DateTime
+  publishedAt  DateTime?
+  @@index([publishedAt])
+}

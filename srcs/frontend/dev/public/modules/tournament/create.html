@@ -1,0 +1,24 @@
+<div class="flex flex-col items-center justify-center h-full w-full">
+	<form id="create_loby_form" class="flex flex-col w-full gap-5 justify-center items-center">
+		<div class="flex flex-row w-full justify-center items-center bg-transparent border border-white rounded-full p-3 gap-3 text-xl max-w-2xl">
+			<input id="pseudo" type="text" placeholder="pseudo..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+		</div>
+
+		<div class="flex flex-col w-full max-w-2xl">
+			<strong>Max Player</strong>
+			<input id="max_players" type="range" min="0" max="3" step="1" value="0" class="w-full"/>
+			<div class="flex flex-row justify-between w-full">
+				<span>2</span>
+				<span>4</span>
+				<span>8</span>
+				<span>16</span>
+			</div>
+		</div>
+
+		<button type="submit" class="flex flex-row w-full justify-center items-center border border-catpuccin-green rounded-full p-3 gap-3 text-xl max-w-2xl" id="create_lobby_btn"> 
+			<strong>Create Lobby</strong><i class="bi bi-box-arrow-in-right"></i>
+		</button>
+		<div id="error_box"></div>
+	</form>
+
+</div>

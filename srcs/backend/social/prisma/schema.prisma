@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["metrics"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SeenEvent {
+  id     String  @id
+  seenAt DateTime
+}
+
+model Friendship {
+  id                Int          @id @default(autoincrement())
+  requesterId       Int
+  receiverId        Int
+
+  status            String       @default("PENDING")
+
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@unique([requesterId, receiverId])
+  @@index([requesterId, status])
+  @@index([receiverId, status])
+}
+
+model Outbox {
+  id           String   @id        // UUID
+  type         String
+  aggregateId  Int
+  payload      String              // JSON envelope
+  occurredAt   DateTime
+  publishedAt  DateTime?
+  @@index([publishedAt])
+}

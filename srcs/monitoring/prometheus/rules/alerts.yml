@@ -1,0 +1,74 @@
+groups:
+  - name: general
+    rules:
+      # Nginx Down
+      - alert: NginxDown
+        expr: nginx_up == 0
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary:  "Target {{ $labels.job }}/{{ $labels.instance }} is down"
+          description: "No scrape data for 10s"
+
+      # High CPU (HOST)
+      - alert: HighCpu
+        expr: avg by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary:  "High Cpu on {{ $labels.instance }}"
+          description: "Avg Cpu > 85% for 10m"
+      
+      # Low Disk Space on Host
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) < 0.10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Filesystem < 10% free"
+      
+      # Nginx stub_status
+      - alert: NginxSpikeRequest
+        expr: rate(nginx_http_requests_total[5m]) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          app: nginx-internal
+        annotations:
+          summary: "High request rate to NGINX"
+          description: "Request rate unusually high ( > 1000/5m window)"
+      
+      # NGINX LOGS
+      - alert: NginxHigh5xxErrors
+        expr: sum(rate(nginx_http_response_count_total{status=~"5.."}[1m])) > 1
+        for: 1m
+        labels:
+          severity: critical
+          app: nginx-log
+        annotations:
+          summary: "Nginx 5xx rate anormally high"
+          description: "5xx responses > 1 rps for over 1m"
+        
+      # Prometheus scrape problem
+      - alert: PrometheusScrapeErrors
+        expr:  rate(prometheus_target_scrapes_exceeded_sample_limit_total[5m]) > 0
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus scrape sampling problems"
+          description: "Some scrapes exceed sample size"
+      
+      # TSDB nearing disk limits
+      - alert: PrometheusTSDBHighHeadSeries
+        expr: prometheus_tsdb_head_series > 2.5e6
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus TSDB head has many series"
+          description: "Head serires unusually high"

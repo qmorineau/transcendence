@@ -1,0 +1,57 @@
+.pongloader_container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  height: 200px;
+}
+.pongloader_bat {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 10px;
+  height: 50px;
+  background-color: #fff;
+  animation: batMoving 4s linear infinite;
+}
+/*for inverse deplacement of first .bat element*/
+.pongloader_bat:nth-child(1) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  animation-direction: reverse;
+}
+@keyframes batMoving {
+  0%,50%,100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-75px);
+  }
+  75% {
+    transform: translateY(75px);
+  }
+}
+.pongloader_ball {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 12.5px;
+  height: 12.5px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;					
+  animation: ballMoving 4s linear infinite;
+  transform: translateX(135px);
+}
+@keyframes ballMoving {
+  0%,100% {
+    transform: translateX(140px);
+  }
+  50% {
+    transform: translateX(-140px);
+  }
+}

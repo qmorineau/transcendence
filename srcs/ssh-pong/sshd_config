@@ -1,0 +1,43 @@
+Port 22
+Protocol 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# No SSH-layer credentials (no prompt, no keys)
+PasswordAuthentication no
+KbdInteractiveAuthentication yes
+ChallengeResponseAuthentication yes
+UsePAM yes
+PubkeyAuthentication no
+PermitEmptyPasswords no
+
+# Session hygiene
+PermitRootLogin no
+AllowUsers player
+MaxAuthTries 2
+LoginGraceTime 15
+ClientAliveInterval 60
+ClientAliveCountMax 2
+
+# Lockdown
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+PermitTTY yes
+PermitUserEnvironment no
+GatewayPorts no
+PermitTunnel no
+Subsystem sftp internal-sftp -f AUTH -l INFO
+
+# Banner
+Banner /etc/issue.net
+
+AcceptEnv LANG LC_*
+
+# One process per session; no shell
+Match User player
+    ForceCommand /usr/local/bin/run_pong_cli.sh
+    ChrootDirectory none
+    X11Forwarding no
+    AllowTcpForwarding no
+    PermitOpen none

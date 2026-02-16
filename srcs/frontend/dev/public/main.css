@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Nico-Moji';
+  src: url('./assets/webfonts/Nico-Moji/Nico-Moji.ttf.woff') format('woff'),
+       url('./assets/webfonts/Nico-Moji/Nico-Moji.ttf.svg#Nico-Moji') format('svg'),
+       url('./assets/webfonts/Nico-Moji/Nico-Moji.ttf.eot'),
+       url('./assets/webfonts/Nico-Moji/Nico-Moji.ttf.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+	--color-dark:				#232634;
+	--color-catpuccin-green: 	#a6d189;
+	--color-catpuccin-gray:		#b5bfe2;
+	--color-catpuccin-red:		#e78284;
+	--color-catpuccin-mauve: 	#ca9ee6;
+	--color-catpuccin-peach:	#ef9f76;
+	--color-catpuccin-base:		#303446;
+	--color-catpuccin-yellow: 	#e5c890;
+	--color-catpuccin-sapphire: #85c1dc;
+	--color-profile:			#ef9f76;
+	--color-profile-opposite:	#85c1dc;
+
+	--font-title: 'Nico-Moji';
+}
+

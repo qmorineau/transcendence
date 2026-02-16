@@ -1,0 +1,19 @@
+filebeat.inputs:
+- type: filestream
+  id: nginx-logs
+  enabled: true
+  paths:
+    - /var/log/nginx/metrics*.log
+
+setup.kibana:
+  host: ${KIBANA_HOSTS}
+  username: ${ELASTIC_USER}
+  password: ${ELASTIC_PASSWORD}
+  ssl.certificate_authorities: ["/usr/share/filebeat/certs/ca/ca.crt"]
+  ssl.verification_mode: full
+
+output.logstash:
+  hosts: ["logstash01:5044"]
+  ssl:
+    certificate_authorities: ["/usr/share/filebeat/certs/ca/ca.crt"]
+    verification_mode: full

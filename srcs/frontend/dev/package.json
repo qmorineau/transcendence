@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^8.22.3",
+    "@babylonjs/loaders": "^8.22.3",
+    "@babylonjs/materials": "^8.22.2",
+    "@tailwindcss/cli": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
+}

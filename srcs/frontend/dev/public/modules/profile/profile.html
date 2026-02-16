@@ -1,0 +1,156 @@
+<div class="w-full h-fit flex flex-col items-center gap-5 relative">
+
+	<!-- header -->
+	<div class="w-full flex flex-row justify-between p-5">
+		<button class="font-title text-3xl" onclick="window.location.hash = '#home';">Transcendance</button>
+	</div>
+
+	<!-- 2fa banner -->
+	<button class="w-full flex flex-row justify-center items-center p-3 bg-catpuccin-red/60 hidden" id="mfa">
+		<p>Your account is not secure, add 2FA <u><strong>here</strong></u></p>
+	</button>
+	
+	<!-- search box -->
+	<div id="search_box" class="h-[50px] w-[600px] mt-5 flex flex-row gap-3 relative"> 
+		<div class="flex flex-row gap-3 px-3 items-center rounded-full bg-catpuccin-base">
+			<i class="bi bi-search text-xl"></i>
+			<form id="search_profile_form" class="flex-1 h-full w-[540px] flex"><input id="search_profile" type="text" placeholder="search..." required class="flex-1 h-[50px] w-full focus:outline-none focus:ring-0 focus:ring-offset-0"></form>
+		</div>
+		<!-- results -->
+		<div class="absolute top-[55px] w-full h-fit rounded-[25px] bg-catpuccin-base/80 backdrop-blur-sm z-50 flex flex-col gap-3 p-2 transition-all duration-200 hidden" id="sr"></div>
+	</div>
+
+	<div id="profile" class="flex-1 flex flex-row w-full justify-center mt-5 gap-10 transform transition-all duration-500 opacity-0 flex-wrap p-10">
+
+		<!-- profile only -->
+		<div class="w-[920px] flex flex-col gap-10 h-fit" id="profile">
+			<!-- streak and pp -->
+			<div class="w-full flex flex-row gap-10">
+				<!-- pp -->
+				<div class="flex flex-row items-center gap-5">
+					<div class="w-[250px] items-center relative" id="profile_pp_holder">
+						<div class="flex flex-col items-center">
+							<img id="profile_pp" src="../assets/images/default/default_pp.jpg"
+								class="w-full aspect-square rounded-full object-cover cursor-pointer" />
+							<input id="image-upload" type="file" accept="image/*" class="hidden" />
+						</div>
+						<div id="profile_pp_upload" class="absolute flex top-0 left-0 w-full h-full items-center justify-center bg-black opacity-0 transition-all duration-300 rounded-full"><i class="bi bi-upload text-6xl"></i></div>
+						<div class="onlineStatus w-[50px] aspect-square rounded-full absolute bottom-[12px] right-[12px] border-[5px] border-dark hidden"></div>
+					</div>
+					<div class="flex flex-col gap-5 relative  p-5" id="profile_form_holder">
+						<h2 class="font-title text-3xl text-profile max-w-[250px] max-h-[50px] overflow-hidden" id="profile_login" contenteditable="false" spellcheck="false" autocorrect="off" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();}">?</h2>
+						<div class="border-l-5 pl-5 rounded-l">
+							<h2 class="font-title text-2xl max-w-[230px] overflow-hidden" id="profile_firstName" contenteditable="false" spellcheck="false" autocorrect="off" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();}">?</h2>
+							<h2 class="font-title text-2xl max-w-[230px] overflow-hidden" id="profile_lastName"  contenteditable="false" spellcheck="false" autocorrect="off" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();}">?</h2>
+						</div>
+						<div id="profile_password_wrap" class="flex flex-row justify-center items-center bg-transparent border border-white rounded-full p-2 gap-2 text-xl w-[260px] hidden">
+							<i class="bi bi-asterisk"></i>
+							<input id="profile_password" type="password" placeholder="change pswd..." class="border-none bg-transparent focus:outline-none focus:ring-0 focus:border-none flex-1 min-w-0">
+						</div>
+						<button id="profile_send_update" class="flex items-center justify-center bg-profile/80 gap-2 p-2 rounded-3xl w-full hidden"><i class="bi bi-pen-fill text-l"></i> <p class="text-xl">save</p></button>
+					</div>
+				</div>
+
+				<!-- streak -->
+				<div class="flex-1 flex flex-col justify-center items-center py-5">
+					<div class="flex-1 h-full w-full flex flex-col border border-white overflow-hidden rounded-3xl gap-3 pt-3">
+						<div class="w-full flex flex-row justify-center">
+							<h2 class="font-title text-3xl">Win Streak</h2>
+						</div>
+						<div class="flex-1 w-full flex flex-row">
+							<div class="w-1/2 h-full flex flex-col items-center border-r-1 border-white gap-5 p-2">
+								<p class="font-title text-xl">current</p>
+								<div class="flex flex-row gap-3">
+									<p class="font-title text-5xl" id="currentStreak">2</p>
+									<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-fire text-profile" viewBox="0 0 16 16">
+										<path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
+									</svg>
+								</div>
+							</div>
+							<div class="w-1/2 h-full flex flex-col items-center gap-5 p-2">
+								<p class="font-title text-xl">best</p>
+								<div class="flex flex-row gap-3">
+									<p class="font-title text-5xl" id="bestStreak">2</p>
+									<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-fire text-profile" viewBox="0 0 16 16">
+										<path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- stats -->
+			<div class="relative w-full flex flex-col justify-center items-center py-5">
+				<!-- title -->
+				<p class="absolute top-[2%] left-[6%] font-title text-xl bg-dark pl-2 pr-2">Stats:</p>
+				<div class="flex-1 h-full w-full flex flex-row border border-white overflow-hidden rounded-3xl p-8 gap-8">
+
+					<!-- elo -->
+					<div class="flex-2 flex flex-col justify-center items-center rounded-2xl gap-3">
+						<h1 class="font-title text-5xl text-profile" id="profile_elo">1400 elo</h1>
+					</div>
+
+					<!-- playtime -->
+					<div class="flex-1 aspect-square flex flex-col justify-center items-center border border-white rounded-2xl gap-3">
+						<p class="text-l font-title">total<br>playtime</p>
+						<p class="text-xl font-title" id="profile_playtime">0h 0m 0s</p>
+					</div>
+					<!-- win rate -->
+					<div class="flex-1 aspect-square flex flex-col justify-center items-center rounded-2xl gap-5 bg-profile/80">
+						<p class="font-title text-xl text-center">Win<br>rate:</p>
+						<p class="font-title text-3xl" id="profile_win_ratio">100%</p>
+					</div>
+					<!-- goal rate -->
+					<div class="flex-1 aspect-square flex flex-col justify-center items-center rounded-2xl gap-5 bg-profile/80">
+						<p class="font-title text-xl text-center">Goal<br>rate:</p>
+						<p class="font-title text-3xl" id="profile_goal_ratio">50%</p>
+					</div>
+
+				</div>
+			</div>
+			 
+			<!-- button menu -->
+			<div id="btn_menu" class="flex flex-row gap-10 hidden">
+				<button class="justify-center items-center rounded-full border border-catpuccin-green gap-3 p-5 hidden" id="big_friendBtn"><i class="icon font-title text-3xl bi bi-plus-circle-fill"></i><p class="text font-title text-3xl">Add friend</p></button>
+				<button class="flex-1 justify-center items-center rounded-full font-title text-3xl border-5 border-profile-opposite gap-3 p-5 hidden" id="big_inviteBtn"><i class="bi bi-controller"></i>Invite to play</button>
+			</div>
+
+			<!-- bottom menu -->
+			<div class="flex flex-row gap-3 justify-center hidden" id="bottom-menu">
+				<button class="px-5 py-3 rounded-full font-title flex flex-row gap-2 bg-catpuccin-yellow/60 text-xl" id="logout">logout <i class="bi bi-box-arrow-left"></i></button>
+				<button class="px-5 py-3 rounded-full font-title flex flex-row gap-2 bg-catpuccin-red/60 text-xl hidden" id="disable_2fa">disable 2fa<i class="bi bi-exclamation-triangle-fill"></i></button>
+				<button class="px-5 py-3 rounded-full font-title flex flex-row gap-2 bg-catpuccin-red/60 text-xl" id="del_account">delete account<i class="bi bi-exclamation-triangle-fill"></i></button>
+			</div>
+
+		</div>
+
+		<div class="flex flex-row gap-10">
+			<!-- game history -->
+			<div id="hist"
+				class="w-[440px] flex flex-col items-center gap-10 border border-white rounded-3xl h-[585px] px-3 overflow-y-scroll">
+				<h1 class="font-title text-3xl">History</h1>
+		
+				<!-- list -->
+				<div id="game_history" class="w-full flex flex-col gap-5"></div>
+			</div>
+		
+			<!-- friend list -->
+			<div class="w-[440px] flex flex-col items-center gap-5 border border-white rounded-3xl h-[585px] px-3 hidden"
+				id="friend_menu" id="friends">
+				<h1 class="font-title text-3xl">friends</h1>
+		
+				<!-- pending -->
+				<div id="friend_requests" class="w-full flex flex-col gap-5"></div>
+		
+				<!-- separator -->
+				<div class="w-[80%] h-1 rounded-full bg-catpuccin-base hidden" id="friend_separator"></div>
+		
+				<!-- friends -->
+				<div id="friends" class="flex-1 w-full flex flex-col gap-5"></div>
+			</div>
+		</div>
+
+	</div>
+</div>

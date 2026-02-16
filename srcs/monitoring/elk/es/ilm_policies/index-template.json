@@ -1,0 +1,14 @@
+{
+  "index_patterns": ["nginx-*"],
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "nginx-retention-policy",
+      "index.lifecycle.rollover_alias": "nginx-logs"
+    },
+    "aliases": {
+      "nginx-logs": {
+        "is_write_index": true
+      }
+    }
+  }
+}

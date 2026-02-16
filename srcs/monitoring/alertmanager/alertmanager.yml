@@ -1,0 +1,54 @@
+
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'deridderloic@gmail.com'
+  smtp_require_tls: true
+  smtp_auth_username: 'deridderloic@gmail.com'
+  smtp_auth_password_file: '/run/secrets/alert_smtp_password'
+
+
+route:
+  receiver: 'email-default'
+  group_by: ['alertname', 'job', 'instance']
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 2h
+  # SEND CRITICAL TO OTHER EMAIL
+  # routes:
+  #   - matchers:
+  #       - severity="critical"
+  #     receiver: 'critical'
+  #     repeat_interval: 30m
+
+receivers:
+  - name: 'email-default'
+    email_configs:
+      - to: "deridderloic@gmail.com"
+        send_resolved: true
+        headers:
+          Subject: >
+            [{{ .Status | toUpper }}][ALERT]
+            {{ if .CommonAnnotations.summary }}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
+        html: |
+          <b>Status:</b> {{ .Status | toUpper }}<br/>
+          {{ range .Alerts -}}
+            • <b>{{ .Labels.alertname }}</b> on <b>{{ .Labels.instance }}</b><br/>
+            {{ with .Annotations.summary }}{{ . }}<br/>{{ end }}
+            {{ with .Annotations.description }}<i>{{ . }}</i><br/>{{ end }}
+            <br/>
+          {{ end -}}
+        text: |
+          Status: {{ .Status | toUpper }}
+          {{ range .Alerts -}}
+          - {{ .Labels.alertname }} on {{ .Labels.instance }}
+            {{- with .Annotations.summary }} — {{ . }}{{ end }}
+            {{- with .Annotations.description }} — {{ . }}{{ end }}
+          {{ end -}}
+
+# If a CRITICAL alert is firing for the same alert/instance,
+# suppress the WARNING to reduce noise.
+inhibit_rules:
+  - source_matchers: ['severity="crtitical"']
+    target_matchers: ['severity="warning"']
+    equal: ["alertname", "instance"]
+

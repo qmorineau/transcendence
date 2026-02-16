@@ -1,0 +1,60 @@
+<div class="relative w-full h-full flex flex-row overflow-hidden p-10 gap-10">
+	<div class="flex-1 relative w-full h-full rounded-3xl flex flex-col justify-between border border-white overflow-hidden">
+
+		<!-- Background Layer -->
+		<div id="tree_parent" class="absolute inset-0 z-0">
+			<div id="tree_holder" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+			</div>
+		</div>
+
+		<!-- Foreground Content -->
+		<div class="relative z-10 flex flex-col-reverse justify-between h-full" id="fg">
+
+			<!-- bottom bar -->
+			<div class="w-full flex flex-row justify-between px-10 pb-10" id="bottom_bar">
+				<div class="flex flex-row gap-5 items-center">
+					<p class="font-title text-3xl">Next opponent: </p>
+					<div class="flex flex-row items-center rounded-full p-3 pr-6 gap-5 border border-grayborder">
+						<img src="./assets/images/default/default_pp.jpg" alt=" " class="aspect-square h-12 rounded-full object-cover" id="pp">
+						<p class="font-title text-2xl" id="next_opponent"></p>
+					</div>
+				</div>
+				<button id="wr_readyBtn" class="rounded-full p-5 border border-catpuccin-red">
+					<p class="font-title text-3xl text-catpuccin-red" id="wr_ready_text">Get Ready</p>
+				</button>
+			</div>
+	
+			<!-- touch screen  -->
+			<div id="touch_screen" class="flex-1 w-full">
+			</div>
+
+
+			<!-- finish line -->
+			<div class="w-full flex flex-row justify-center items-center py-10 bg-catpuccin-peach/60 gap-5 hidden" id="finish_bar">
+				<p class="font-title text-3xl">Tournament Finished! GG to </p>
+				<div class="flex flex-row items-center rounded-full p-3 pr-6 gap-5 border border-grayborder">
+					<img src="./assets/images/default/default_pp.jpg" alt=" " class="aspect-square h-12 rounded-full object-cover"
+						id="winer_pp">
+					<p class="font-title text-2xl" id="winer_uname"></p>
+				</div>
+				<button id="exit_wr"><i class="bi bi-box-arrow-left text-3xl"></i></button>
+			</div>
+
+			<!-- lost line -->
+			<div class="w-full flex flex-row justify-around items-center p-2 bg-catpuccin-red/60 hidden" id="loser_bar">
+				<p class="font-title text-2xl"> You lost :< </p>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- spectator -->
+	<div id="spectator" class="h-full rounded-3xl flex flex-col justify-center items-center border border-white overflow-hidden w-20 transform-all duration-1000">
+		<div id="not_spectating" class="flex items-center justify-center w-[500px]">
+			<h1 class="font-title text-xl rotate-90">
+				Not Spectating a game <i class="bi bi-camera-video-off-fill"></i>
+			</h1>
+		</div>
+		<canvas id="renderCanvas" class="w-full h-full hidden"></canvas>
+	</div>
+</div>

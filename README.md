@@ -1,4 +1,4 @@
-# Transcendance - The Ultimate Pong Experience
+# Transcendence - The Ultimate Pong Experience
 
 ## Overview
 
